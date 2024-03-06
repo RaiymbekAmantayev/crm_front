@@ -46,6 +46,15 @@
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
             <router-link to="/shedule/add"><button class="btn btn-outline-light">Shedules</button></router-link>
           </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
+            <router-link to="/shedules"><button class="btn btn-outline-light">Shedules</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
+            <router-link to="/achievments"><button class="btn btn-outline-light">Achievements</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+            <router-link to="/achievments/all"><button class="btn btn-outline-light">Achievements</button></router-link>
+          </li>
         </ul>
       </div>
     </div>

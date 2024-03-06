@@ -10,7 +10,15 @@ export default {
     },
     getTeacherByUserId(userId) {
         const token = localStorage.getItem('token')
-        return Api().get(`api/achievment/user?teacherId=${userId}`,        {
+        return Api().get(`api/achievment/user?userId=${userId}`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
+    getAll() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/achievment/all`,        {
             headers: {
                 Authorization: `Bearer ${token}`,
             }

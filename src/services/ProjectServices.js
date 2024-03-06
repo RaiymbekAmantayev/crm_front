@@ -9,12 +9,29 @@ export default {
             }
         })
     },
-    showProject() {
+    showProject(userId) {
         const token = localStorage.getItem('token')
-        return Api().get(`api/project/show`,        {
+        return Api().get(`api/project/show?userId=${userId}`,        {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
         })
     },
+    DeleteProject(userId) {
+        const token = localStorage.getItem('token')
+        return Api().delete(`api/project/del/${userId}`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
+    ChangeStatus(projectId, comment){
+        const token = localStorage.getItem('token')
+        console.log(comment)
+        return Api().put(`api/project/change/?projectId=${projectId}`,   {comment:comment},    {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+}
 }

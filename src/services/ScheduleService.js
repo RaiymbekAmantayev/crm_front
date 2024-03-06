@@ -16,4 +16,12 @@ export default {
             }
         })
     },
+    showSheduleForTeacher() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/shedule/teacher/all`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
 }

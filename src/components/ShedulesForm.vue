@@ -1,5 +1,38 @@
 <template>
   <div>
+    <div>
+      <table  class="table" >
+        <thead>
+        <tr>
+          <th>discipline title</th>
+          <th>week_day</th>
+          <th>start_time</th>
+          <th>end_time</th>
+          <th>auditory</th>
+          <th>CRN</th>
+          <th>Teacher</th>
+          <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  v-for="sched in shedules"  :key="sched.id">
+          <td>{{ sched.lessons ? sched.lessons.title : 'No position' }}</td>
+          <td>{{ sched.week_days }}</td>
+          <td>{{ sched.start_time }}</td>
+          <td>{{ sched.end_time }}</td>
+          <td>{{ sched.auditory}}</td>
+          <td>{{ sched.crns ? sched.crns.title : 'No position' }}</td>
+          <td>{{ sched.teachers && sched.teachers.user ? sched.teachers.user.email : 'No position' }}</td>
+          <td><ul class="nav" style="display: flex; justify-content: flex-end;">
+            <li class="nav-item">
+              <router-link to=""><button class="btn btn-warning">edit</button></router-link>
+            </li>
+          </ul></td>
+        </tr>
+        </tbody>
+      </table>
+  </div>
+  <div>
     <h2>Add Schedule</h2>
     <form @submit.prevent="addSchedule">
       <div class="mb-3">
@@ -56,6 +89,7 @@
       <button type="submit" class="btn btn-primary">Add Schedule</button>
     </form>
   </div>
+  </div>
 </template>
 
 <script>
@@ -63,6 +97,7 @@ import ScheduleService from '@/services/ScheduleService';
 import LessonService from "@/services/LessonService";
 import CrnService from "@/services/CrnService";
 import TeacherService from "@/services/TeacherService";
+
 export default {
   data() {
     return {
@@ -79,6 +114,13 @@ export default {
       crns:{},
       teachers:{
         user:[]
+      },
+      shedules:{
+        lessons:[],
+        crns:[],
+        teachers:{
+          user:[]
+        }
       }
     };
   },
@@ -91,6 +133,9 @@ export default {
     },
   },
   async mounted(){
+    const response = await ScheduleService.showShedule()
+    this.shedules = response.data
+    console.log(this.shedules)
     const lessons = await LessonService.showLesson()
     this.lessons = lessons.data
     console.log(this.lessons)
@@ -106,9 +151,18 @@ export default {
       try {
         const response = await ScheduleService.addSchedule(this.formData);
         console.log('Schedule added successfully:', response.data);
-        // Здесь вы можете выполнить дополнительные действия после успешного добавления расписания
+        this.refreshSchedule()
       } catch (error) {
         console.error('Error adding schedule:', error);
+      }
+    },
+    async refreshSchedule() {
+      try {
+        const response = await ScheduleService.showShedule();
+        this.shedules = response.data;
+
+      } catch (error) {
+        console.error('Error refreshing organizations:', error);
       }
     },
     generateTimeOptions(startHour, startMinute, endHour, endMinute, interval) {

@@ -22,17 +22,17 @@
           <label for="phone_number">Phone Number:</label>
           <p>{{ user.phone_number }}</p>
         </div>
-        <div v-if="teacher.salary" class="form-group">
+        <div v-if="teacher" class="form-group">
           <label for="phone_number">Salary:</label>
           <p>{{ teacher.salary }}</p>
         </div>
-        <div v-if="teacher && teacher.grades && position.title">
+        <div v-if="teacher">
           <label>Your grade is:</label>
           <p>{{ position && position.title }} {{ teacher.grades.title }}</p>
         </div>
-        <div class="form-group">
+        <div v-if="user.department" class="form-group">
           <label>Belongs to department</label>
-          <p>{{ user.department.title }}</p>
+          <p v-if="user.department.title">{{ user.department.title }}</p>
         </div>
         <div v-if="user.role.value == 'teacher'"  class="form-group">
           <router-link :to="{ path: 'achievment/' }" class="btn btn-primary">

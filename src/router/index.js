@@ -14,6 +14,10 @@ import GradesView from "@/components/GradesView.vue"
 import LessonVIews from "@/components/lessonVIews.vue";
 import AddDeans from "@/components/addDeans.vue";
 import ShedulesForm from "@/components/ShedulesForm.vue";
+import ScheduleVIewsTeacher from "@/components/ScheduleVIewsTeacher.vue";
+import MyAchievementsView from "@/components/MyAchievementsView.vue";
+import allAchievementsUser from "@/components/allAchievementsUser.vue";
+import AchievementDetail from "@/components/AchievementDetail.vue";
 
 const routes = [
     {
@@ -46,6 +50,18 @@ const routes = [
         component: addAchievments
     },
     {
+        path: '/achievments',
+        component: MyAchievementsView
+    },
+    {
+        path: '/achievments/all',
+        component: allAchievementsUser
+    },
+    {
+        path: '/achievments/:id',
+        component: AchievementDetail
+    },
+    {
         path: '/teachers',
         component: TeachersComponent
     },
@@ -76,6 +92,10 @@ const routes = [
     {
         path: '/shedule/add',
         component: ShedulesForm
+    },
+    {
+        path: '/shedules',
+        component: ScheduleVIewsTeacher
     }
 ]
 
