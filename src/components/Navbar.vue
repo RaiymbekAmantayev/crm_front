@@ -1,5 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-primary mt-0">
+  <body>
+  <nav class="navbar navbar-expand-lg bg-dark mt-0">
     <div class="container-fluid">
       <div v-if="!$store.state.isUserLoggedIn">
         <a  class="navbar-brand text-white" href="#">Crm System</a>
@@ -28,37 +29,41 @@
           <li class="nav-item" v-if="$store.state.isUserLoggedIn">
             <router-link to="/"><button @click="logout" class="btn btn-outline-light">Logout</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
-            <router-link to="/users"><button class="btn btn-outline-light">users</button></router-link>
-          </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
             <router-link to="/teachers"><button class="btn btn-outline-light">teachers</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
             <router-link to="/lesson"><button class="btn btn-outline-light">Lessons</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
             <router-link to="/grade"><button class="btn btn-outline-light">Grades</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
-            <router-link to="/dean/add"><button class="btn btn-outline-light">Departmnet</button></router-link>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
+            <router-link to="/dean/add"><button class="btn btn-outline-light">Department</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
-            <router-link to="/shedule/add"><button class="btn btn-outline-light">Shedules</button></router-link>
+            <router-link to="/shedule/add"><button class="btn btn-outline-light">Schedules</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
+            <router-link to="/achievments/all"><button class="btn btn-outline-light">Achievements</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
+            <router-link to="/users"><button class="btn btn-outline-light">users</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4 ">
             <router-link to="/shedules"><button class="btn btn-outline-light">Shedules</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
             <router-link to="/achievments"><button class="btn btn-outline-light">Achievements</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
-            <router-link to="/achievments/all"><button class="btn btn-outline-light">Achievements</button></router-link>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
+            <router-link to="/dep_View"><button class="btn btn-outline-light">About Department</button></router-link>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  </body>
 </template>
 
 <script>
@@ -86,6 +91,8 @@ export default {
 }
 </script>
 
+
+{
 <style>
 
 </style>

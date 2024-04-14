@@ -1,0 +1,143 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url("../assets/fonts/OpenSans-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "OpenSans";
+    src: url("../assets/fonts/OpenSans-Light.woff") format("woff");
+    font-style: normal;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../assets/fonts/Raleway-Bold.woff") format("woff");
+    font-style: bold;
+    font-weight: 800;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.achieve {
+    background-color: #e2e8f0;
+    padding-bottom: 70px;
+}
+
+.achieve__content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+}
+
+.achieve:first-child {
+    padding-top: 25px;
+}
+
+.achieve__content:last-child {
+    padding-top: 20px;
+}
+
+h1 {
+    font-family: "OpenSans";
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.form>input {
+    width: 300px;
+    height: 30px;
+    border: 0;
+    font-family: "OpenSans";
+    font-size: 16px;
+    padding-left: 10px;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.form>input:focus {
+    border-color: red;
+}
+
+.form1 {
+    margin-top: 15px;
+}
+
+.form1>input {
+    padding-right: 45px;
+}
+
+label {
+    font-family: "OpenSans";
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+select {
+    width: 300px;
+    padding: 6px;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    margin-top: 23px;
+    font-family: "OpenSans";
+    font-size: 14px;
+}
+
+.achieve__content-btn {
+    padding-top: 25px;
+    margin-bottom: 15px;
+}
+
+.achieve__content-btn>a>button {
+    padding: 10px 121px;
+    border-radius: 6px;
+    font-family: "OpenSans";
+    color: #000;
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #fe0b0b;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.achieve__content-btn>a>button:hover {
+    background-color: #fe0b0b;
+    color: #fff;
+}
+
+.achieve__content-btn2>a>button {
+    padding: 10px 116px;
+    border-radius: 6px;
+    color: #000;
+    font-family: "OpenSans";
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #06c610;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.achieve__content-btn2>a>button:hover {
+    background-color: #06c610;
+    color: #fff;
+}

@@ -16,6 +16,14 @@ export default {
             }
         })
     },
+    showAllTeachers() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/teacher/showall`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
     showTeachersByCurrent() {
         const token = localStorage.getItem('token')
         return Api().get(`api/teacher/current/user`,        {

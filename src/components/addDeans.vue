@@ -1,41 +1,35 @@
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title">Add Dean</h2>
-            <form @submit.prevent="addDean" class="needs-validation" novalidate>
-              <div class="mb-3">
-                <p>select User</p>
-                <select v-model="formData.userId">
-                  <option v-for="u in users" :key="u.id" :value="u.id">
-                    {{u.email}}
-                  </option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="salary" class="form-label">Salary:</label>
-                <input type="number" class="form-control" id="salary" v-model="formData.salary" required>
-                <div class="invalid-feedback">Please provide a valid salary.</div>
-              </div>
-              <div class="mb-3">
-                <label for="duties" class="form-label">Duties:</label>
-                <input type="text" class="form-control" id="duties" v-model="formData.duties" required>
-                <div class="invalid-feedback">Please provide valid duties.</div>
-              </div>
-              <div class="mb-3">
-                <p>select Role</p>
-                <select v-model="formData.deanRoleId">
-                  <option v-for="d in deanRoles" :key="d.id" :value="d.id">
-                    {{d.value}}
-                  </option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Add Dean</button>
-            </form>
-          </div>
-        </div>
+  <div class="department">
+    <div class="department__content">
+      <h1>Add Dean</h1>
+      <div class="department__content-description">
+        <p>select user</p>
+        <select v-model="formData.userId">
+          <option v-for="u in users" :key="u.id" :value="u.id">
+            {{u.email}}
+          </option>
+        </select>
+      </div>
+      <form action="">
+        <input type="text"  v-model="formData.salary" placeholder="Зарплата">
+      </form>
+      <form action="">
+        <input type="text"  v-model="formData.duties" placeholder="Обязанности">
+      </form>
+      <div class="department__content-descriptionTwo">
+        <p>select Role</p>
+        <select v-model="formData.deanRoleId">
+          <option v-for="d in deanRoles" :key="d.id" :value="d.id">
+            {{d.value}}
+          </option>
+        </select>
+      </div>
+      <div class="department__content-button">
+        <a href="">
+          <button @click="addDean">
+            Добавить
+          </button>
+        </a>
       </div>
     </div>
   </div>
@@ -81,21 +75,113 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
+@font-face {
+  font-family: "OpenSans";
+  src: url("../assets/fonts/OpenSans-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../assets/fonts/OpenSans-Light.woff") format("woff");
+  font-style: normal;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("../assets/fonts/Raleway-Bold.woff") format("woff");
+  font-style: bold;
+  font-weight: 800;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.department{
   align-items: center;
-  min-height: 100vh;
+  margin-left: 30%;
 }
 
-.card {
-  width: 500%;
+.department__content {
+  display: flex;
+  width: 500px;
+  border-radius: 20px;
+  margin-left: 50px;
+  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.form-label {
-  font-weight: bold;
+h1 {
+  font-size: 24px;
+  font-family: "OpenSans";
+  margin-bottom: 10px;
+  padding-top: 25px;
 }
 
-.invalid-feedback {
-  color: red;
+.department__content-description {
+  font-size: 12px;
+  font-family: "OpenSans";
+  color: #949494;
+  margin-bottom: 10px;
+}
+
+.department__content-descriptionTwo {
+  font-size: 12px;
+  font-family: "OpenSans";
+  color: #949494;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+form>input {
+  width: 300px;
+  height: 30px;
+  border: 0;
+  font-family: "OpenSans";
+  font-size: 16px;
+  padding-left: 10px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+form>input:focus {
+  border-color: red;
+}
+
+.department__content-button {
+  padding-top: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 25px;
+}
+
+.department__content-button>a>button {
+  padding: 10px 121px;
+  border-radius: 6px;
+  font-family: "OpenSans";
+  color: #fff;
+  font-size: 14px;
+  background-color: #4120fd;
+  border: 2px solid #4120fd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.department__content-button>a>button:hover {
+  background-color: #fff;
+  color: #000;
 }
 </style>

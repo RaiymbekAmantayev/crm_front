@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2>List of requirments to grade</h2>
-    <table  class="table" >
+    <h2 v-if="currentUserRole == 1">List of requirments to grade</h2>
+    <h2 v-if="currentUserRole == 6">Settings of detail</h2>
+    <table v-if="currentUserRole == 1"  class="table" >
       <thead>
       <tr>
         <th>title</th>
@@ -56,7 +57,7 @@
           <tr>
             <th>id</th>
             <th>title</th>
-            <th>action</th>
+            <th v-if="currentUserRole== 6">action</th>
           </tr>
           </thead>
           <tbody>
@@ -65,7 +66,7 @@
             <td>{{ pos.title }}</td>
             <td>
               <ul class="nav" style="display: flex; justify-content: flex-end;"
-                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
                 <li class="nav-item">
                   <router-link to=""><button class="btn btn-warning">edit</button></router-link>
                 </li>
@@ -77,7 +78,7 @@
       </div>
       <div class="col-md-6">
         <!-- В этой колонке будет форма добавления -->
-        <div>
+        <div v-if="currentUserRole == 6">
           <h2>Add Position</h2>
           <form v-if="isPositionFormOpen" @submit.prevent="addPosition">
             <div class="mb-3">
@@ -103,7 +104,7 @@
             <th>id</th>
             <th>title</th>
             <th>points</th>
-            <th>action</th>
+            <th v-if="currentUserRole == 6">action</th>
           </tr>
           </thead>
           <tbody>
@@ -113,7 +114,7 @@
             <td>{{ cat.points }}</td>
             <td>
               <ul class="nav" style="display: flex; justify-content: flex-end;"
-                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
                 <li class="nav-item">
                   <router-link to=""><button class="btn btn-warning">edit</button></router-link>
                 </li>
@@ -123,7 +124,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" v-if="currentUserRole == 6">
         <h2>
           Add Category
         </h2>
@@ -156,7 +157,7 @@
             <th>id</th>
             <th>title</th>
             <th>points</th>
-            <th>action</th>
+            <th v-if="currentUserRole == 6">action</th>
           </tr>
           </thead>
           <tbody>
@@ -166,7 +167,7 @@
             <td>{{ pub.points }}</td>
             <td>
               <ul class="nav" style="display: flex; justify-content: flex-end;"
-                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
                 <li class="nav-item">
                   <router-link to=""><button class="btn btn-warning">edit</button></router-link>
                 </li>
@@ -176,7 +177,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" v-if="currentUserRole == 6">
         <h2>
           Add Publication
         </h2>
@@ -209,7 +210,7 @@
             <th>id</th>
             <th>title</th>
             <th>points</th>
-            <th>action</th>
+            <th v-if="currentUserRole == 6">action</th>
           </tr>
           </thead>
           <tbody>
@@ -219,7 +220,7 @@
             <td>{{ org.points }}</td>
             <td>
               <ul class="nav" style="display: flex; justify-content: flex-end;"
-                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+                  v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
                 <li class="nav-item">
                   <router-link to=""><button class="btn btn-warning">edit</button></router-link>
                 </li>
@@ -229,7 +230,7 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" v-if="currentUserRole == 6">
         <h2>
           Add Organizations
         </h2>

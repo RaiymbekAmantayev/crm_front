@@ -1,4 +1,54 @@
 <template>
+  <div>
+    <h2>List of achievement</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>user email</th>
+        <th>academic degree</th>
+        <th>experience</th>
+        <th>count_projects</th>
+        <th>count_monopraphy</th>
+        <th>count_seminar</th>
+        <th>count_article</th>
+        <th>count_sertificates</th>
+        <th>points</th>
+        <th>grade</th>
+        <th>action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-if="achievments" >
+        <td>{{ achievments.user ? achievments.user.email : 'No user email' }}</td>
+        <td>{{ achievments.academic_degree }}</td>
+        <td>{{  achievments.experience }}</td>
+        <td>{{ achievments.count_of_projects }}</td>
+        <td>{{ achievments.count_of_monography }}</td>
+        <td>{{ achievments.count_of_seminar }}</td>
+        <td>{{ achievments.count_of_articles }}</td>
+        <td>{{ achievments.count_of_sertific }}</td>
+        <td>{{ achievments.points }}</td>
+
+        <td>
+          {{
+            achievments.possible_grades && achievments.possible_grades.position
+                ? achievments.possible_grades.position.title
+                : "error"
+          }} {{
+            achievments.possible_grades
+                ? achievments.possible_grades.title
+                : "No position"
+          }}
+        </td>
+
+
+        <td>
+          <button class="btn btn-warning" @click="UpdateTeacherGrade">Принимать</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="container">
     <button @click="toggleAddCategoryForm" class="btn btn-sm btn-primary">
       {{ isAddCategoryFormOpen ? '-' : '+' }}
@@ -115,11 +165,17 @@
 import ProjectServices from "@/services/ProjectServices";
 import ArticleService from "@/services/ArticleService";
 import SertificatingService from "@/services/SertificatingService";
-
+import Achievments from "@/services/Achievments";
 
 export default {
   data() {
     return {
+      achievments: {
+        possible_grades: {
+          position: []
+        },
+        users: []
+      },
       projects:{
         project_categories:[]
       },
@@ -141,6 +197,9 @@ export default {
   async mounted(){
     const id = this.$route.params.id;
     console.log(id)
+    const achievements = await Achievments.getTeacherByUserId(id)
+    this.achievments = achievements.data
+    console.log(this.achievments)
     const projects= await ProjectServices.showProject(id)
     this.projects = projects.data
     const article = await ArticleService.showArticle(id)
@@ -183,6 +242,15 @@ export default {
         console.log(e)
       }
     },
+    async UpdateTeacherGrade(){
+      try{
+        const id = this.$route.params.id
+        const response = await Achievments.updateTeachersGrade(id)
+        console.log(response.data)
+      }catch(e){
+        console.log(e)
+      }
+    },
     currentUserId() {
       return this.$store.state.user ? this.$store.state.user.id : null;
     },
@@ -207,6 +275,7 @@ export default {
     toggleSerticiationForm() {
       this.isSertificateOpen= !this.isSertificateOpen;
     },
+
   },
   computed: {
     pdfUrl() {

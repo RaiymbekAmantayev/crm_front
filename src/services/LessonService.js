@@ -16,4 +16,12 @@ export default {
             }
         })
     },
+    showAllLesson() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/lesson/lessonAll`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
 }

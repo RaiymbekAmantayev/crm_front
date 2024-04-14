@@ -54,6 +54,7 @@
             <th>file</th>
             <th>category</th>
             <th>points</th>
+            <th>status</th>
             <th>action</th>
           </tr>
           </thead>
@@ -66,6 +67,8 @@
               <a :href="pdfUrl" target="_blank">Открыть  файл</a></td>
             <td>{{ pro.project_categories ? pro.project_categories.title : 'No position' }}</td>
             <td>{{ pro.points }}</td>
+            <td v-if="pro.status == 1" >засчитан</td>
+            <td v-if="pro.status == 0" >не засчитан</td>
             <td>
                 <button @click="deleteProject(pro.id)" class="btn btn-danger">delete</button>
             </td>
@@ -113,22 +116,24 @@
           <tr>
             <th>id</th>
             <th>title</th>
-            <th>file/link</th>
+            <th>link</th>
             <th>publication</th>
             <th>points</th>
+            <th>status</th>
+            <th>comment</th>
             <th>action</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(article, i) in articles" :key="article.id">
+          <tr  v-for="(article, i) in articles" :key="article.id">
             <td>{{i + 1}}</td>
             <td>{{ article.title }}</td>
-            <td v-if="article.file">
-              <label for="cv_file">File:</label>
-              <a :href="FileUrl" target="_blank">Открыть файл</a></td>
-            <td v-if="article.link">{{article.link}}</td>
+            <td v-if="article.link"><a :href="article.link" target="_blank">{{article.link.split('/').slice(-2).join('/')}}</a> </td>
             <td>{{ article.publications ? article.publications.title : 'No position' }}</td>
             <td>{{ article.points }}</td>
+            <td v-if="article.status == 1" >засчитан</td>
+            <td v-if="article.status == 0" >не засчитан</td>
+            <td>{{article.comment}}</td>
             <td>
                   <button @click="deleteArticle(article.id)" class="btn btn-danger">delete</button>
             </td>
@@ -147,16 +152,9 @@
               <input type="text" class="form-control" v-model="article_Data.title" />
             </div>
             <div class="form-group">
-              <label>Choose:</label><br>
-              <input type="radio" v-model="selectedOption" value="link"> Link
-              <input type="radio" v-model="selectedOption" value="file"> File
-              <div v-show="selectedOption === 'link'">
+              <div>
                 <label for="project_title">Link:</label>
-                <input type="text" class="form-control" v-model="articles.link" />
-              </div>
-              <div v-show="selectedOption === 'file'">
-                  <label for="image">File:</label>
-                  <input type="file" class="form-control-file" @change="handleArticle" required>
+                <input type="text" class="form-control" v-model="article_Data.link" />
               </div>
             </div>
             <div class="form-group">
@@ -188,6 +186,7 @@
             <th>file</th>
             <th>organization</th>
             <th>points</th>
+            <th>status</th>
             <th>action</th>
           </tr>
           </thead>
@@ -198,6 +197,8 @@
             <td><a :href="FileUrlSertific" target="_blank">Открыть файл</a></td>
             <td>{{ sertific.organization ? sertific.organization.title : 'No position' }}</td>
             <td>{{ sertific.points }}</td>
+            <td v-if="sertific.status == 1" >засчитан</td>
+            <td v-if="sertific.status == 0" >не засчитан</td>
             <td>
                   <button @click="deleteSertific(sertific.id)" class="btn btn-danger">delete</button>
             </td>
@@ -266,7 +267,6 @@ export default {
       },
       article_Data:{
         title: '',
-        file: null,
         link: '',
         publicationId: null
       },
@@ -365,6 +365,7 @@ export default {
       try{
         const response = await ProjectServices.addProject(this.project_Data);
         console.log(response.data);
+        alert(response.data)
         this.refreshProjects()
         this.refreshAchievment()
         this.project_Data.title= '';
@@ -382,9 +383,7 @@ export default {
         };
         console.log(articleData.publicationId)
         console.log(this.article_Data.publicationId)
-        if (this.article_Data.file) {
-          articleData.file = this.article_Data.file;
-        } else if (articleData.link) {
+        if (this.article_Data.link) {
           articleData.link = this.article_Data.link;
         }
         console.log(articleData)

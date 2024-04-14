@@ -1,5 +1,30 @@
 <template>
-  <div>
+  <div v-if="currentUserRole == 6">
+    <table  class="table" >
+      <thead>
+      <tr>
+        <th>title</th>
+        <th>credit_count</th>
+        <th>description</th>
+        <th>category</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  v-for="les in lessonsAll"  :key="les.id">
+        <td>{{ les.title }}</td>
+        <td>{{ les.credit_count }}</td>
+        <td>{{ les.description }}</td>
+        <td>{{ les.categories ? les.categories.title : 'No position' }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <ul class="nav" style="display: flex; justify-content: flex-end;" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+      <li class="nav-item">
+        <router-link to="/lesson/add"><button class="btn btn-primary">addLesson</button></router-link>
+      </li>
+    </ul>
+  </div>
+  <div v-if="currentUserRole == 1">
     <table  class="table" >
       <thead>
       <tr>
@@ -30,7 +55,7 @@
       </li>
     </ul>
   </div>
-  <div class="container">
+  <div class="container" >
     <button @click="toggleCrn" class="btn btn-sm btn-primary">
       {{ isCrnOpen ? '-' : '+' }}
     </button>
@@ -60,11 +85,11 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-6">
+      <div v-if="isCrnOpen && currentUserRole == 6" class="col-md-6">
         <h2>
           Add CRN
         </h2>
-        <div v-if="isCrnOpen">
+        <div >
           <form @submit.prevent="AddCrn">
             <div class="mb-3">
               <label for="title" class="form-label">Title:</label>
@@ -87,6 +112,9 @@ export default {
       lessons:{
         categories:[]
       },
+      lessonsAll:{
+        categories:[]
+      },
       crns:{},
       crnData:{
         title:''
@@ -97,6 +125,8 @@ export default {
   async mounted(){
     const response = await LessonService.showLesson()
     this.lessons = response.data
+    const lessonAll = await LessonService.showAllLesson()
+    this.lessonsAll = lessonAll.data
     const crn = await CrnService.showCrn()
     this.crns = crn.data
     console.log(this.lessons)

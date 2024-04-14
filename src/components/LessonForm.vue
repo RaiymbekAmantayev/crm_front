@@ -1,19 +1,30 @@
 <template>
-  <div class="file-upload-container container mt-5">
-    <h1>add Teacher</h1>
-    <div>
-      <div class="form-group">
+  <div class="department">
+    <div class="department__content">
+      <h1>Add lesson</h1>
+      <div class="department__content-description">
+        <p>title</p>
         <input type="text" placeholder="title" class="form-control" v-model="title" />
-        <input type="number" placeholder="credit-count" class="form-control"  v-model="credit_count" />
-        <input type="text" placeholder="description" class="form-control" v-model="description" />
       </div>
-      <p>select Category</p>
-      <select v-model="selectedCategory">
-        <option v-for="cat in category" :key="cat.id" :value="cat.id">
-          {{ cat.title }}
-        </option>
-      </select>
-      <button @click="addLesson" class="btn btn-primary btn-block">Add Info</button>
+      <form action="">
+        <input type="number" placeholder="credit-count" class="form-control"  v-model="credit_count" />
+      </form>
+      <form action="">
+        <input type="text" placeholder="description" class="form-control" v-model="description" />
+      </form>
+      <div class="department__content-descriptionTwo">
+        <p>select Category</p>
+        <select v-model="selectedCategory">
+          <option v-for="cat in category" :key="cat.id" :value="cat.id">
+            {{ cat.title }}
+          </option>
+        </select>
+      </div>
+      <div class="department__content-button">
+          <button @click="addLesson">
+            Добавить
+          </button>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +67,10 @@ export default {
           description: this.description,
           categoryId: this.selectedCategory,
         });
+        this.title = ''
+        this.credit_count = ''
+        this.description = ''
+        this.selectedCategory = ''
         console.log(response.data);
       } catch (e) {
         console.log(e);

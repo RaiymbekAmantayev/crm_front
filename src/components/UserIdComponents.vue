@@ -1,79 +1,127 @@
 <template>
-  <div id="app" class="container mt-5">
-    <h1>User Profile</h1>
-    <div class="card">
-      <div class="card-body">
-        <div v-if="user.first_name" class="form-group">
-          <label for="first_name">First Name:</label>
-          <p>{{ user.first_name }}</p>
+  <div id="app">
+  <section v-if="user" class="page">
+    <div  class="profile">
+      <div v-if="user" class="profile__content">
+        <img v-if="user.image" :src="'http://localhost:7000/' + user.image">
+        <img v-else src="../assets/img/profilePageAvatar.png" alt="">
+        <div class="profile__content-wrapper">
+          <h1 v-if="user.first_name">{{ user.first_name }}</h1>
+          <p v-if="user.roleId == 1">Admin</p>
+          <p v-else-if="user.roleId== 4">Teacher</p>
+          <p v-else>User</p>
+          <p v-if="user.roleId == 4 && user.cv_file"><a :href="pdfUrl" target="_blank">Открыть  резюме</a></p>
         </div>
-        <div v-if="user.last_name" class="form-group">
-          <label for="last_name">Last Name:</label>
-          <p>{{ user.last_name }}</p>
+        <div v-if="getCurrentUser === 6" class="profile__content-wrapper-buttons">
+          <div class="department__content-description">
+            <p>select dep</p>
+            <select v-model="selectedDep">
+              <option v-for="d in dep" :key="d.id" :value="d.id">
+                {{d.title}}
+              </option>
+            </select>
+          </div>
+          <div class="department__content-description">
+            <p>select role</p>
+            <select  v-model="selectedRole">
+              <option v-for="role in roles" :key="role.id" :value="role.id">
+                {{role.value}}
+              </option>
+            </select>
+          </div>
+          <button class="profileDescription-button" @click="changeRole">
+              Изменить
+          </button>
         </div>
-        <div class="form-group">
-          <label for="last_name">Email:</label>
-          <p>{{ user.email }}</p>
-        </div>
-        <div v-if="user.image"  class="form-group">
-          <img :src="'http://localhost:7000/' + user.image" class="avatar-img" alt="...">
-        </div>
-        <div v-if="user.cv_file" class="form-group">
-          <label for="cv_file">CV:</label>
-          <a :href="pdfUrl" target="_blank">Открыть  резюме</a>
-        </div>
-        <div class="form-group">
-          <label for="phone_number">Phone Number:</label>
-          <p>{{ user.phone_number }}</p>
-        </div>
-        <div v-if="teacher.salary" class="form-group">
-          <label for="phone_number">Salary:</label>
-          <p>{{ teacher.salary }}</p>
-        </div>
-        <div v-if="teacher && teacher.grades && position.title">
-          <label>Your grade is:</label>
-          <p>{{ position && position.title }} {{ teacher.grades.title }}</p>
-        </div>
-        <div v-if="user.phone_number" class="form-group">
-          <label for="phone_number">Phone Number:</label>
-          <p>{{ user.phone_number }}</p>
-        </div>
-        <div class="form-group">
-          <label for="phone_number">Role:</label>
-          <p>{{ user.role.value }}</p>
-          <p>{{user.role.description}}</p>
-        </div>
-
-        <div v-if="user.department" class="form-group">
-          <label>Принадлежить к департаменту:</label>
-          <p>{{ user.department.title }}</p>
-        </div>
-        <div v-if="$store.state.isUserLoggedIn && getCurrentUser == 1">
-        <p>change role</p>
-        <select  v-model="selectedRole">
-          <option v-for="role in roles" :key="role.id" :value="role.id">
-            {{role.value}}
-          </option>
-        </select>
-          <p>add to dep</p>
-          <select v-model="selectedDep">
-            <option v-for="d in dep" :key="d.id" :value="d.id">
-              {{d.title}}
-            </option>
-          </select>
-      </div>
       </div>
     </div>
-    <button @click="changeRole" class="btn-btn-primary">change</button>
+    <div class="profileDescription">
+      <div class="profileDescription-wrapper">
+        <div class="header">
+          Full Name
+        </div>
+        <div class="paragraph" v-if="user.first_name || user.last_name">
+          {{user.first_name}} {{user.last_name}}
+        </div>
+        <div class="paragraph" v-else>
+        </div>
+      </div>
+      <hr>
+      <div class="profileDescription-wrapper">
+        <div class="header">
+          Email
+        </div>
+        <div class="paragraph" v-if="user.email">
+          {{user.email}}
+        </div>
+        <div class="paragraph" v-else>
+        </div>
+      </div>
+      <hr>
+      <div class="profileDescription-wrapper">
+        <div class="header">
+          Phone
+        </div>
+        <div class="paragraph" v-if=" user.phone_number">
+          {{user.phone_number}}
+        </div>
+        <div class="paragraph" v-else>
+        </div>
+      </div>
+      <hr>
+      <div class="profileDescription-wrapper">
+        <div v-if="user.roleId === 4 && user.roleId !== 2" class="header">
+          User's grade is
+        </div>
+        <div v-else class="header">
+          CV
+        </div>
+        <div v-if="user.roleId === 4" class="paragraph">
+          <p v-if="position === undefined || position === null || position.title === undefined || position.title === null || teacher.grades.title === undefined || teacher.grades.title === null"></p>
+          <p v-else-if="position && position.title && teacher.grades.title">{{ (position && position.title) ? position.title : "" }} {{ (teacher && teacher.grades && teacher.grades.title) ? teacher.grades.title : "" }} уровня</p>
+        </div>
+
+        <div v-else class="paragraph">
+          <a :href="pdfUrl" target="_blank">Открыть  резюме</a>
+        </div>
+
+      </div>
+      <hr>
+      <div class="profileDescription-wrapper">
+        <div class="header">
+          department
+        </div>
+        <div class="paragraph">
+          <p v-if="user.department && user.department.title">{{ user.department.title }}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="profileDescription-wrapper">
+        <div class="header">
+          Role
+        </div>
+        <div class="paragraph">
+          <p>{{ user.role.value }}</p>
+        </div>
+      </div>
+      <hr>
+      <div v-if="user.roleId === 4" class="profileDescription-button">
+        <button @click="routing(user.id)">
+            Показать достижения
+        </button>
+      </div>
+    </div>
+  </section>
   </div>
 </template>
 
 <script>
+
 import UserService from "@/services/UserService";
 import RoleServices from "@/services/RoleServices";
 import Dep from "@/services/departmentService"
 import TeacherService from "@/services/TeacherService";
-// import {th} from "vuetify/locale";
+
 export default {
   data() {
     return {
@@ -112,6 +160,9 @@ export default {
     }
   },
   methods:{
+    routing(userId){
+      this.$router.push('/achievments/'+ userId)
+    },
     async changeRole(){
       try{
         const id = this.$route.params.id;
@@ -126,6 +177,7 @@ export default {
         console.log(this.selectedRole);
         console.log(id);
         console.log(response.data);
+        this.$router.push('/users');
       } catch (e) {
         console.log(e);
       }
@@ -143,10 +195,29 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #f8f9fa;
-}
 
+.department__content-description {
+  font-size: 12px;
+  font-family: "OpenSans";
+  color: #949494;
+  margin-bottom: 10px;
+}
+body {
+background-color: #f8f9fa;
+}
+.button{
+  padding: 10px 121px;
+  border-radius: 6px;
+  font-family: "OpenSans";
+  color: #fff;
+  font-size: 14px;
+  background-color: #4120fd;
+  border: 2px solid #4120fd;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+}
 .container {
   background-color: #ffffff;
   padding: 20px;

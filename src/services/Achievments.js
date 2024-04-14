@@ -24,4 +24,20 @@ export default {
             }
         })
     },
+    getAllAchievement() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/achievment/showall`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
+    updateTeachersGrade (id){
+        const token = localStorage.getItem('token')
+        return Api().put(`api/achievment/update?id=${id}`,      {},  {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    }
 }
