@@ -17,6 +17,25 @@ export default {
             }
         })
     },
+    getAll(userId, departmentId, publicationId) {
+        const token = localStorage.getItem('token');
+        let url = 'api/art/all';
+
+        if (userId) {
+            url += `?userId=${encodeURIComponent(userId)}`;
+        }
+        if(departmentId){
+            url += `?departmentId=${encodeURIComponent(departmentId)}`;
+        }
+        if(publicationId){
+            url += `?publicationId=${encodeURIComponent(publicationId)}`;
+        }
+        return Api().get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+    },
     DeleteArticle(id) {
         const token = localStorage.getItem('token')
         return Api().delete(`api/art/del/${id}`,        {

@@ -332,8 +332,8 @@ export default {
         console.log(id)
         const response = await ArticleService.DeleteArticle(id)
         console.log(response)
-        this.refreshArticle()
-        this.refreshAchievment()
+        // this.refreshArticle()
+        // this.refreshAchievment()
       }catch(e){
         console.log(e)
       }

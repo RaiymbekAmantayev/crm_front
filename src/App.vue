@@ -3,20 +3,17 @@
     <NavbarComponent></NavbarComponent>
 <!--    <HeaderVue></HeaderVue>-->
     <router-view></router-view>
-    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import NavbarComponent from './components/Navbar.vue'
 // import HeaderVue from "@/components/navbar/headerVue.vue";
-import footerComponent from "@/components/navbar/footerComponent.vue";
 export default {
 
   name: 'app',
   components: {
     NavbarComponent,
-    footerComponent
     // HeaderVue
   }
 }

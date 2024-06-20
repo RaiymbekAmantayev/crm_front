@@ -64,7 +64,9 @@
             <th>file</th>
             <th>category</th>
             <th>points</th>
-            <th>action</th>
+            <th>status</th>
+            <th>comment</th>
+<!--            <th>action</th>-->
           </tr>
           </thead>
           <tbody>
@@ -77,10 +79,12 @@
             </td>
             <td>{{ pro.project_categories ? pro.project_categories.title : 'No position' }}</td>
             <td>{{ pro.points }}</td>
-            <td>
-              <button @click="changeStatusProject(pro.id)" class="btn btn-danger">dont accept</button>
-              <input type="text" :placeholder="'reason of dont accepting ' + pro.id" v-model="comment[pro.id]">
-            </td>
+            <td>{{pro.status}}</td>
+            <td>{{pro.comment}}</td>
+<!--            <td>-->
+<!--              <button @click="changeStatusProject(pro.id)" class="btn btn-danger">dont accept</button>-->
+<!--              <input type="text" :placeholder="'reason of dont accepting ' + pro.id" v-model="comment[pro.id]">-->
+<!--            </td>-->
           </tr>
           </tbody>
         </table>
@@ -102,7 +106,8 @@
             <th>file/link</th>
             <th>publication</th>
             <th>points</th>
-            <th>action</th>
+            <th>status</th>
+            <th>comment</th>
           </tr>
           </thead>
           <tbody>
@@ -115,10 +120,8 @@
             <td v-if="article.link">{{article.link}}</td>
             <td>{{ article.publications ? article.publications.title : 'No position' }}</td>
             <td>{{ article.points }}</td>
-            <td>
-              <button @click="changeStatusArticle(article.id)" class="btn btn-danger">dont accept</button>
-              <input type="text" placeholder="reason of dont accepting" v-model="article_comment[article.id]">
-            </td>
+            <td>{{article.status}}</td>
+            <td>{{article.comment}}</td>
           </tr>
           </tbody>
         </table>
@@ -140,7 +143,9 @@
             <th>file</th>
             <th>organization</th>
             <th>points</th>
-            <th>action</th>
+            <th>status</th>
+            <th>comment</th>
+<!--            <th>action</th>-->
           </tr>
           </thead>
           <tbody>
@@ -150,10 +155,12 @@
             <td><a :href="FileUrlSertific" target="_blank">Открыть файл</a></td>
             <td>{{ sertific.organization ? sertific.organization.title : 'No position' }}</td>
             <td>{{ sertific.points }}</td>
-            <td>
-              <button @click="changeStatusSertific(sertific.id)" class="btn btn-danger">dont accepting</button>
-              <input type="text" placeholder="reason of dont accepting" v-model="sertific_comment[sertific.id]">
-            </td>
+            <td>{{sertific.status}}</td>
+            <td>{{sertific.comment}}</td>
+<!--            <td>-->
+<!--              <button @click="changeStatusSertific(sertific.id)" class="btn btn-danger">dont accepting</button>-->
+<!--              <input type="text" placeholder="reason of dont accepting" v-model="sertific_comment[sertific.id]">-->
+<!--            </td>-->
           </tr>
           </tbody>
         </table>

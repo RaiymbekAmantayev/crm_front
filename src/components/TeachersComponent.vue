@@ -1,5 +1,5 @@
 <template>
-  <h1>Все преподователи</h1>
+  <h1>Барлық мұғалімдер</h1>
   <div class="container" v-if="currentUserRole == 6">
     <table>
       <thead>

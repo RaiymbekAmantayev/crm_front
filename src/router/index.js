@@ -18,7 +18,7 @@ import ScheduleVIewsTeacher from "@/components/ScheduleVIewsTeacher.vue";
 import MyAchievementsView from "@/components/MyAchievementsView.vue";
 import allAchievementsUser from "@/components/allAchievementsUser.vue";
 import AchievementDetail from "@/components/AchievementDetail.vue";
-
+import AllSertifcates from "@/components/AllSertifcates.vue";
 const routes = [
     {
         path: '/register',
@@ -96,7 +96,11 @@ const routes = [
     {
         path: '/shedules',
         component: ScheduleVIewsTeacher
-    }
+    },
+    {
+        path: '/allSert',
+        component: AllSertifcates
+    },
 ]
 
 const router = createRouter({

@@ -17,6 +17,14 @@ export default {
             }
         })
     },
+    getAll() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/sertific/all`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
     deleteService(id) {
         const token = localStorage.getItem('token')
         return Api().delete(`api/sertific/del/${id}`,        {

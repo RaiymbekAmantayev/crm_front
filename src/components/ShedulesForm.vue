@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Расписание уроков</h1>
+    <h1>Сабақ кестесі</h1>
     <table>
       <thead>
       <tr>
@@ -350,14 +350,14 @@ button[type="submit"]:hover,
 
 .department{
   align-items: center;
-  margin-left: 30%;
+  //margin-left: 30%;
 }
 
 .department__content {
   display: flex;
   width: 500px;
   border-radius: 20px;
-  margin-left: 50px;
+  //margin-left: 50px;
   margin-top: 50px;
   flex-direction: column;
   align-items: center;

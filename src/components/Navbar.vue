@@ -21,43 +21,46 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" v-if="!$store.state.isUserLoggedIn">
-            <router-link to="/" class="nav-link text-white">Sign In</router-link>
+            <router-link to="/" class="nav-link text-white">Войти</router-link>
           </li>
           <li class="nav-item" v-if="!$store.state.isUserLoggedIn">
-            <router-link to="/register" class="nav-link text-white">Sign Up</router-link>
+            <router-link to="/register" class="nav-link text-white">Зарегистрироваться</router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn">
-            <router-link to="/"><button @click="logout" class="btn btn-outline-light">Logout</button></router-link>
+            <router-link to="/"><button @click="logout" class="btn btn-outline-light">Выйти</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
-            <router-link to="/teachers"><button class="btn btn-outline-light">teachers</button></router-link>
+            <router-link to="/teachers"><button class="btn btn-outline-light">Учителя</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
-            <router-link to="/lesson"><button class="btn btn-outline-light">Lessons</button></router-link>
+            <router-link to="/lesson"><button class="btn btn-outline-light">Дисциплины</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
-            <router-link to="/grade"><button class="btn btn-outline-light">Grades</button></router-link>
-          </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
-            <router-link to="/dean/add"><button class="btn btn-outline-light">Department</button></router-link>
+            <router-link to="/grade"><button class="btn btn-outline-light">Коэффициент</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
-            <router-link to="/shedule/add"><button class="btn btn-outline-light">Schedules</button></router-link>
+            <router-link to="/dean/add"><button class="btn btn-outline-light">Отделение</button></router-link>
           </li>
-          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1 || currentUserRole == 6">
-            <router-link to="/achievments/all"><button class="btn btn-outline-light">Achievements</button></router-link>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+            <router-link to="/shedule/add"><button class="btn btn-outline-light">Расписания</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 1">
+            <router-link to="/achievments/all"><button class="btn btn-outline-light">Достижения</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
-            <router-link to="/users"><button class="btn btn-outline-light">users</button></router-link>
+            <router-link to="/users"><button class="btn btn-outline-light">Пользователи</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4 ">
-            <router-link to="/shedules"><button class="btn btn-outline-light">Shedules</button></router-link>
+            <router-link to="/shedules"><button class="btn btn-outline-light">РАсписания</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
-            <router-link to="/achievments"><button class="btn btn-outline-light">Achievements</button></router-link>
+            <router-link to="/achievments"><button class="btn btn-outline-light">ДОстижения</button></router-link>
           </li>
           <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 4">
-            <router-link to="/dep_View"><button class="btn btn-outline-light">About Department</button></router-link>
+            <router-link to="/dep_View"><button class="btn btn-outline-light">Об отделении</button></router-link>
+          </li>
+          <li class="nav-item" v-if="$store.state.isUserLoggedIn &&  currentUserRole == 6">
+            <router-link to="/allSert"><button class="btn btn-outline-light">Все сертификаты</button></router-link>
           </li>
         </ul>
       </div>

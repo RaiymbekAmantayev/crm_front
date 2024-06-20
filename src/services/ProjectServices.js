@@ -17,6 +17,14 @@ export default {
             }
         })
     },
+    getAll() {
+        const token = localStorage.getItem('token')
+        return Api().get(`api/project/all`,        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+    },
     DeleteProject(userId) {
         const token = localStorage.getItem('token')
         return Api().delete(`api/project/del/${userId}`,        {
@@ -25,6 +33,7 @@ export default {
             }
         })
     },
+
     ChangeStatus(projectId, comment){
         const token = localStorage.getItem('token')
         console.log(comment)
